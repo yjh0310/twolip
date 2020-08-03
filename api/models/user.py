@@ -1,10 +1,28 @@
 import hashlib
 from datetime import datetime
 
-from sqlalchemy import Column
+from sqlalchemy import Column, orm
 from sqlalchemy.dialects.mysql import CHAR, TEXT, DATETIME, BOOLEAN
 
 from libs.database.types import Base
+
+class UserState:
+
+    def __init__(self, user):
+        self.user = user
+
+    def match(self):
+        pass
+
+class CoupleState(UserState):
+
+    def match(self):
+        print('?????')
+
+class SingleState(UserState):
+
+    def match(self):
+        print('짝을 찾습니다.')
 
 
 class User(Base):
@@ -22,6 +40,7 @@ class User(Base):
     school = Column(TEXT)
     major = Column(TEXT)
     company = Column(TEXT)
+    is_couple = Column(BOOLEAN)
 
     def __init__(self, password, **kwargs):
         '''
@@ -30,6 +49,13 @@ class User(Base):
         super().__init__(**kwargs)
         self.phone = None
         self.password = self.gen_password_hash(password)
+
+    @orm.reconstructor
+    def init_on_load(self):
+        if self.is_couple:
+            self.state = CoupleState(self)
+            return
+        self.state = SingleState(self)
 
     @classmethod
     def gen_password_hash(cls, password):

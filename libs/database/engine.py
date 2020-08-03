@@ -4,7 +4,7 @@ from sqlalchemy import create_engine, types, Integer, Column
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-engine = create_engine('mysql+pymysql://root:159263@localhost/phonebook', pool_recycle=300)
+engine = create_engine('mysql+pymysql://root:rewrite1224@localhost/twolip', pool_recycle=300)
 SessionMaker = sessionmaker(bind=engine)
 
 def set_session_destroyer(app):
