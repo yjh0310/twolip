@@ -25,3 +25,5 @@ def send_sms():
 
     Session().commit()
     return {'auth_key':str(auth.auth_key)}, Status.HTTP_200_OK
+
+

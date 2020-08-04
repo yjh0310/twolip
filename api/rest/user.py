@@ -38,8 +38,6 @@ def login():
     if user.password != User.gen_password_hash(request.json.get('password')):
         raise ClientError('invalid password', Status.HTTP_401_UNAUTHORIZED)
 
-
-
     user_session = afr(UserSession(user))
     Session().commit()
     return {'token': user_session.token, 'expiry': DateTimeHelper.full_datetime(user_session.expiry)}, Status.HTTP_200_OK
@@ -47,5 +45,4 @@ def login():
 
 @route
 def get_my_profile():
-    g.user_session.user.match()
     return {'user': g.user_session.user.json()}, Status.HTTP_200_OK

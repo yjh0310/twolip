@@ -4,12 +4,11 @@ import prance
 from typing import Any, Dict
 from pathlib import Path
 
-#from libs.database.engine import set_session_destroyer
-
+# from libs.database.engine import set_session_destroyer
 
 
 app = connexion.App(__name__, specification_dir='api/spec/', options={'swagger_path': swagger_ui_3_path})
-#set_session_destroyer(app.app)
+# set_session_destroyer(app.app)
 
 
 def get_bundled_specs(main_file: Path) -> Dict[str, Any]:

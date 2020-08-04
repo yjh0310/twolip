@@ -14,7 +14,7 @@ class SmsAuth(Base):
     auth_key = Column(CHAR(80))
     auth_value = Column(CHAR(10))
     phone_num = Column(CHAR(20))
-    expiration = Column(DATETIME) # 유효기간
+    expiration = Column(DATETIME)
 
     def __init__(self, phone_num, **kwargs):
         super().__init__(**kwargs)

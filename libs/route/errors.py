@@ -20,3 +20,4 @@ class ClientError(BaseError):
 
 class ServerError(BaseError):
     code = 500
+
